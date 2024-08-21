@@ -43,8 +43,10 @@ class GroundBlock extends SpriteComponent
     if (position.x < -size.x) {
       removeFromParent();
       if (gridPosition.x == 0) {
+        // Cheklov qo'shilgan segmentni yuklash
+        final nextSegmentIndex = _chooseNextSegmentIndex();
         game.loadGameSegments(
-          Random().nextInt(segments.length),
+          nextSegmentIndex,
           game.lastBlockXPosition,
         );
       }
@@ -60,5 +62,12 @@ class GroundBlock extends SpriteComponent
     }
 
     super.update(dt);
+  }
+
+  int _chooseNextSegmentIndex() {
+    int index = Random().nextInt(segments.length);
+    // Shu yerdan chuqurchalar sonini boshqarish shartlarini kiritishingiz mumkin
+    // Masalan, ketma-ket chuqurchalar bo'lishiga yo'l qo'ymaslik
+    return index;
   }
 }

@@ -10,12 +10,12 @@ import 'overlays/overlays.dart';
 
 class EmberQuestGame extends FlameGame
     with HasCollisionDetection, HasKeyboardHandlerComponents {
-  late double lastBlockXPosition = 0.0;
+  late double lastBlockXPosition = 1;
   late UniqueKey lastBlockKey;
   double objectSpeed = 0.0;
   late EmberPlayer _ember;
   int starsCollected = 0;
-  int health = 3;
+  int health = 4;
 
   @override
   Future<void> onLoad() async {
@@ -87,7 +87,7 @@ class EmberQuestGame extends FlameGame
 
   void reset() {
     starsCollected = 0;
-    health = 3;
+    health = 4;
     initializeGame(false);
   }
 

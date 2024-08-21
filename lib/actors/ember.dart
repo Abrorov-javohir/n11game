@@ -18,7 +18,7 @@ class EmberPlayer extends SpriteAnimationComponent
   final Vector2 fromAbove = Vector2(0, -1);
   bool isOnGround = false;
   final double gravity = 30;
-  final double jumpSpeed = 600;
+  final double jumpSpeed = 900;
   final double terminalVelocity = 150;
 
   bool hasJumped = false;
@@ -53,7 +53,6 @@ class EmberPlayer extends SpriteAnimationComponent
 
     return true;
   }
-
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     if (other is GroundBlock || other is PlatformBlock) {
@@ -73,7 +72,6 @@ class EmberPlayer extends SpriteAnimationComponent
         position += collisionNormal.scaled(separationDistance);
       }
     }
-
     if (other is Star) {
       other.removeFromParent();
       game.starsCollected++;
@@ -85,7 +83,6 @@ class EmberPlayer extends SpriteAnimationComponent
 
     super.onCollision(intersectionPoints, other);
   }
-
   void hit() {
     if (!hitByEnemy) {
       game.health--;
@@ -103,19 +100,15 @@ class EmberPlayer extends SpriteAnimationComponent
         },
     );
   }
-
   @override
   void update(double dt) {
     velocity.x = horizontalDirection * moveSpeed;
-
     if (horizontalDirection < 0 && scale.x > 0) {
       flipHorizontally();
     } else if (horizontalDirection > 0 && scale.x < 0) {
       flipHorizontally();
     }
-
     velocity.y += gravity;
-
     if (hasJumped) {
       if (isOnGround) {
         velocity.y = -jumpSpeed;
@@ -123,9 +116,7 @@ class EmberPlayer extends SpriteAnimationComponent
       }
       hasJumped = false;
     }
-
     velocity.y = velocity.y.clamp(-jumpSpeed, terminalVelocity);
-
     game.objectSpeed = 0;
 
     // Camera movement logic
